@@ -1,0 +1,56 @@
+{
+  "name": "node-serive-template",
+  "version": "1.0.0",
+  "description": "nodejs 服务模板",
+  "main": "bin/www.js",
+  "scripts": {
+    "build:zip": "node ./scripts/zip.js",
+    "start:local": "cross-env CURRENT_ENV=local nodemon bin/www.js",
+    "start:prod": "pm2 start ecosystem.config.js --env production",
+    "start:prod:NoPm2": "cross-env CURRENT_ENV=prod node ./bin/www.js",
+    "prod:local": "cross-env CURRENT_ENV=prod nodemon ./bin/www.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@alicloud/pop-core": "^1.8.0",
+    "@codemirror/lang-javascript": "^6.1.1",
+    "@codemirror/lang-json": "^6.0.1",
+    "@codemirror/theme-one-dark": "^6.1.0",
+    "@koa/cors": "^4.0.0",
+    "@koa/router": "^10.1.1",
+    "@sapphire/snowflake": "^3.5.5",
+    "ali-oss": "^6.22.0",
+    "alipay-sdk": "^4.14.0",
+    "axios": "^1.2.0",
+    "bcryptjs": "^3.0.2",
+    "chalk": "2.4.2",
+    "codemirror": "^6.0.1",
+    "decimal.js": "^10.5.0",
+    "dotenv": "^16.0.3",
+    "fs-extra": "^11.3.0",
+    "jsonwebtoken": "^9.0.2",
+    "jszip": "^3.10.1",
+    "koa": "^2.13.4",
+    "koa-body": "^6.0.1",
+    "koa-logger": "^3.2.1",
+    "koa-static": "^5.0.0",
+    "moment": "^2.29.1",
+    "mysql2": "^3.14.1",
+    "nodemon": "^2.0.15",
+    "ora": "^5.4.1",
+    "path-to-regexp": "5.x",
+    "pm2": "^6.0.5",
+    "svg-captcha": "^1.4.0",
+    "uuid": "^11.1.0",
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  },
+  "engines": {
+    "node": ">=16.20"
+  }
+}

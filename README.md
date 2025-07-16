@@ -138,3 +138,25 @@ ALIYUN_OSS_BUCKET=xxxxx
 ALIYUN_OSS_REGION=oss-cn-beijing # 例如 'oss-cn-hangzhou'
 
 ```
+
+### 用户名和密码
+
+```bash
+# 插入用户信息
+insert into users (user_id, account, nickname, avatar, password, role, email, phone_number, is_active)
+values (1, 'admin', '王先生', null, '$2b$10$PiWo/j8SO7RlC8qB0lRXNOdeGIlH7oM/uKkgKAHNb7/pvX/3p8pbK', 'SUPER_ADMIN', null, '18238770720', 1);
+```
+
+### 数据库初始化
+
+```bash
+# 1、创建数据库
+CREATE DATABASE IF NOT EXISTS yw_db;
+# 2、需要自己复制 model 中的 sql 创建表
+```
+
+## 启动项目
+
+```bash
+yarn run start:local
+```

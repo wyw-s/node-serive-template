@@ -6,7 +6,7 @@ const SQLBuilderChain = require('../utils/SQLBuilderChain');
 module.exports = class LoginService {
   static queryUserByAccount(values) {
     const [sql, params] = SQLBuilderChain()
-      .table(users.tableName)
+      .table(users.table)
       .select('userId', 'account', 'password', 'nickname', 'role')
       .where('account', values.account)
       .toSQL();
@@ -16,7 +16,7 @@ module.exports = class LoginService {
 
   static queryUserByPhone(values) {
     const [sql, params] = SQLBuilderChain()
-      .table(users.tableName)
+      .table(users.table)
       .select('userId', 'account', 'password', 'nickname', 'role', 'phoneNumber')
       .where('phoneNumber', values.phoneNumber)
       .toSQL();
@@ -29,7 +29,7 @@ module.exports = class LoginService {
    */
   static userInfo(values) {
     const [sql, params] = SQLBuilderChain()
-      .table(users.tableName)
+      .table(users.table)
       .select('userId', 'account', 'nickname', 'avatar', 'email', 'role', 'phoneNumber')
       .where('account', values.account)
       .where('userId', values.userId)

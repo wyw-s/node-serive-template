@@ -11,7 +11,7 @@ module.exports = class UsersService {
    */
   static findUsersList(values, pagination) {
     const [sql, countSql, params] = SQLBuilderChain()
-      .table(users.tableName)
+      .table(users.table)
       .select('userId', 'account', 'nickname', 'role', 'avatar', 'phoneNumber', 'email', 'isActive', 'createdTime', 'updatedTime')
       .where('userId', values.userId)
       .where('account', values.account)
@@ -32,7 +32,7 @@ module.exports = class UsersService {
    */
   static superAdmin(values, options) {
     const [sql, params] = SQLBuilderChain()
-      .table(users.tableName)
+      .table(users.table)
       .update({
         role: values.role
       })
@@ -48,7 +48,7 @@ module.exports = class UsersService {
    */
   static handOverSuperAdmin(values, uniqueId) {
     const [sql, params] = SQLBuilderChain()
-      .table(users.tableName)
+      .table(users.table)
       .update(values, uniqueId)
       .toSQL();
 

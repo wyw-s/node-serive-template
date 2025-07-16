@@ -89,9 +89,9 @@ async function init() {
 
   await initializeDatabase();
 
-  await checkTableExists(dictTypeModel.sql, dictTypeModel.tableName, 1);
-  await checkTableExists(dictItemModel.sql, dictItemModel.tableName);
-  await checkTableExists(usersModel.sql, usersModel.tableName);
+  await checkTableExists(dictTypeModel.sql, dictTypeModel.table, 1);
+  await checkTableExists(dictItemModel.sql, dictItemModel.table);
+  await checkTableExists(usersModel.sql, usersModel.table);
 }
 
 module.exports = init;

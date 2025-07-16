@@ -1,8 +1,6 @@
 'use strict';
 
-const { connection } = require('../config/db');
-
-const tableFields = {
+const fields = {
   item_id: 'itemId',
   dict_key: 'dictKey',
   item_key: 'itemKey',
@@ -12,7 +10,7 @@ const tableFields = {
   updated_time: 'updatedTime'
 };
 
-const createDictionaryItemTableSql = `
+const sql = `
 CREATE TABLE IF NOT EXISTS dictionary_item (
     item_id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT '字典项item_id',
     dict_key varchar(32) NOT NULL COMMENT '字典 code',
@@ -28,8 +26,7 @@ CREATE TABLE IF NOT EXISTS dictionary_item (
 `;
 
 module.exports = {
-  connection,
-  tableFields,
-  tableName: 'dictionary_item',
-  sql: createDictionaryItemTableSql
+  fields,
+  table: 'dictionary_item',
+  sql
 };

@@ -13,7 +13,7 @@ module.exports = class DictService {
    */
   static getDictItemList(values) {
     const [sql, params] = SQLBuilderChain()
-      .table(dictionaryItemModel.tableName)
+      .table(dictionaryItemModel.table)
       .select()
       .where('dictKey', values.dictKey)
       .orderByDesc('createdTime')
@@ -29,7 +29,7 @@ module.exports = class DictService {
    */
   static dictItemAdd(values) {
     const [sql, params] = SQLBuilderChain()
-      .table(dictionaryItemModel.tableName)
+      .table(dictionaryItemModel.table)
       .insert({
         itemName: values.itemName,
         itemKey: values.itemKey,
@@ -48,7 +48,7 @@ module.exports = class DictService {
    */
   static dictAdd(values) {
     const [sql, params] = SQLBuilderChain()
-      .table(dictionaryTypeModel.tableName)
+      .table(dictionaryTypeModel.table)
       .insert({
         dictName: values.dictName,
         dictKey: values.dictKey,
@@ -65,7 +65,7 @@ module.exports = class DictService {
    */
   static findDictList(values) {
     const [sql, params] = SQLBuilderChain()
-      .table(dictionaryTypeModel.tableName)
+      .table(dictionaryTypeModel.table)
       .select('dictId', 'dictKey', 'dictName', 'remark', 'createdTime')
       .where(values)
       .orderByDesc('createdTime')
@@ -80,7 +80,7 @@ module.exports = class DictService {
    */
   static updateDict(data, dictKey) {
     const [sql, params] = SQLBuilderChain()
-      .table(dictionaryTypeModel.tableName)
+      .table(dictionaryTypeModel.table)
       .update({
         dictName: data.dictName,
         remark: data.remark
@@ -97,7 +97,7 @@ module.exports = class DictService {
    */
   static updateDictItem(data, keys) {
     const [sql, params] = SQLBuilderChain()
-      .table(dictionaryItemModel.tableName)
+      .table(dictionaryItemModel.table)
       .update({
         itemName: data.itemName,
         remark: data.remark
@@ -114,7 +114,7 @@ module.exports = class DictService {
    */
   static delDictById(dictId) {
     const [sql, params] = SQLBuilderChain()
-      .table(dictionaryItemModel.tableName)
+      .table(dictionaryItemModel.table)
       .delete()
       .where('dictId', dictId)
       .toSQL();
@@ -128,7 +128,7 @@ module.exports = class DictService {
    */
   static findDictItemList(values) {
     const [sql, params] = SQLBuilderChain()
-      .table(dictionaryItemModel.tableName)
+      .table(dictionaryItemModel.table)
       .select('itemId', 'itemName', 'itemKey', 'remark', 'createdTime')
       .where('dictId', values.dictId)
       .orderByDesc('createdTime')

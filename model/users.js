@@ -1,8 +1,6 @@
 'use strict'
 
-const { connection, withTransaction } = require('../config/db');
-
-const tableFields = {
+const fields = {
   user_id: 'userId',
   account: 'account',
   nickname: 'nickname',
@@ -16,7 +14,7 @@ const tableFields = {
   updated_time: 'updatedTime',
 };
 
-const createUsersTable = `
+const sql = `
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id VARCHAR(64) UNIQUE NOT NULL COMMENT '用户id',
@@ -34,9 +32,7 @@ CREATE TABLE users (
 `
 
 module.exports = {
-  connection,
-  withTransaction,
-  tableFields,
-  tableName: 'users',
-  sql: createUsersTable
+  fields,
+  table: 'users',
+  sql
 };

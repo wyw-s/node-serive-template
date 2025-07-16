@@ -49,7 +49,7 @@ class SQLBuilderChain {
   /**
    * 启用/禁用SQL别名优化
    * @param {boolean} enable - 是否使用别名
-   * @returns {AliasQueryBuilder}
+   * @returns {SQLBuilderChain} 返回当前实例（用于链式调用）
    */
   useAliasOptimization(enable = true) {
     this._query.useAlias = enable;
@@ -148,7 +148,7 @@ class SQLBuilderChain {
   /**
    * 设置表名
    * @param {string} table - 表名
-   * @returns {SQLBuilderChain}
+   * @returns {SQLBuilderChain} 返回当前实例（用于链式调用）
    */
   table(table) {
     this._query.table = table;
@@ -158,7 +158,7 @@ class SQLBuilderChain {
   /**
    * 设置返回字段（SELECT）
    * @param {...string} fields - 要查询的字段（小驼峰格式）
-   * @returns {SQLBuilderChain}
+   * @returns {SQLBuilderChain} 返回当前实例（用于链式调用）
    */
   select(...fields) {
     this._query.type = 'select';
@@ -171,7 +171,7 @@ class SQLBuilderChain {
   /**
    * 准备插入数据（支持批量）
    * @param {Object|Array} data - 要插入的数据(对象或数组)
-   * @returns {SQLBuilderChain}
+   * @returns {SQLBuilderChain} 返回当前实例（用于链式调用）
    */
   insert(data) {
     this._query.type = 'insert';
@@ -212,7 +212,7 @@ class SQLBuilderChain {
   /**
    * 设置INSERT RETURNING字段(PostgreSQL等支持)
    * @param {...string} columns - 要返回的字段
-   * @returns {QueryBuilder}
+   * @returns {SQLBuilderChain} 返回当前实例（用于链式调用）
    */
   returning(...columns) {
     this._query.returning = columns;
@@ -225,7 +225,7 @@ class SQLBuilderChain {
    * 准备更新数据（支持批量）
    * @param {Object|Array} data - 要更新的数据
    * @param {string} [keyField='id'] - 批量更新时的关键字段
-   * @returns {SQLBuilderChain}
+   * @returns {SQLBuilderChain} 返回当前实例（用于链式调用）
    */
   update(data, keyField = 'id') {
     this._query.type = 'update';
@@ -281,7 +281,7 @@ class SQLBuilderChain {
 
   /**
    * 准备删除数据（支持批量）
-   * @returns {SQLBuilderChain}
+   * @returns {SQLBuilderChain} 返回当前实例（用于链式调用）
    */
   delete(ids, keyField = 'id') {
     this._query.type = 'delete';
@@ -324,7 +324,7 @@ class SQLBuilderChain {
    * @param {string} operator - 操作符
    * @param {*} value - 值
    * @param {string} [boolean='AND'] - 逻辑连接符
-   * @returns {SQLBuilderChain}
+   * @returns {SQLBuilderChain} 返回当前实例（用于链式调用）
    */
   where(field, operator, value, boolean = 'AND') {
     // 支持简写形式 where('age', 18) => where('age', '=', 18)
@@ -349,7 +349,7 @@ class SQLBuilderChain {
    * @param {string} field - 字段名
    * @param {string} operator - 操作符
    * @param {*} value - 值
-   * @returns {QueryBuilder}
+   * @returns {SQLBuilderChain} 返回当前实例（用于链式调用）
    */
   orWhere(field, operator, value) {
     return this.where(field, operator, value, 'OR');
@@ -361,7 +361,7 @@ class SQLBuilderChain {
    * @param {Array} values - 值数组
    * @param {string} [boolean='AND'] - 逻辑连接符
    * @param {boolean} [not=false] - 是否为NOT IN
-   * @returns {QueryBuilder}
+   * @returns {SQLBuilderChain} 返回当前实例（用于链式调用）
    */
   whereIn(field, values, boolean = 'AND', not = false) {
 
@@ -386,7 +386,7 @@ class SQLBuilderChain {
    * @param {string} field - 字段名
    * @param {string} value - 匹配值
    * @param {string} [boolean='AND'] - 逻辑连接符
-   * @returns {QueryBuilder}
+   * @returns {SQLBuilderChain} 返回当前实例（用于链式调用）
    */
   whereLike(field, value, boolean = 'AND') {
 
@@ -410,7 +410,7 @@ class SQLBuilderChain {
    * @param {string} operator - 操作符
    * @param {Function} callback - 子查询构建回调
    * @param {string} [boolean='AND'] - 逻辑连接符
-   * @returns {QueryBuilder}
+   * @returns {SQLBuilderChain} 返回当前实例（用于链式调用）
    */
   // whereSub(field, operator, callback, boolean = 'AND') {
   //   const subQuery = new SQLBuilderChain(this.connection);
@@ -433,7 +433,7 @@ class SQLBuilderChain {
    * 添加ORDER BY子句
    * @param {string} field - 字段名
    * @param {string} [direction='ASC'] - 排序方向
-   * @returns {QueryBuilder}
+   * @returns {SQLBuilderChain} 返回当前实例（用于链式调用）
    */
   orderBy(field, direction = 'ASC') {
     const snakeColumn = this.#camelToSnake(field);
@@ -448,7 +448,7 @@ class SQLBuilderChain {
   /**
    * 添加DESC ORDER BY子句
    * @param {string} field - 字段名
-   * @returns {QueryBuilder}
+   * @returns {SQLBuilderChain} 返回当前实例（用于链式调用）
    */
   orderByDesc(field) {
     return this.orderBy(field, 'DESC');
@@ -459,7 +459,7 @@ class SQLBuilderChain {
   /**
    * 设置LIMIT
    * @param {number} value - 限制数量
-   * @returns {QueryBuilder}
+   * @returns {SQLBuilderChain} 返回当前实例（用于链式调用）
    */
   limit(value) {
     if (typeof value !== 'number' || value < 0) return this;
@@ -471,7 +471,7 @@ class SQLBuilderChain {
   /**
    * 设置OFFSET
    * @param {number} value - 偏移量
-   * @returns {QueryBuilder}
+   * @returns {SQLBuilderChain} 返回当前实例（用于链式调用）
    */
   offset(value) {
     if (typeof value !== 'number' || value < 0) return this;
@@ -485,10 +485,10 @@ class SQLBuilderChain {
   /**
    * 执行 COUNT 查询
    * @param {string} [field='*'] - 要计数的字段
-   * @returns {Promise<number>} 返回计数结果
+   * @returns {SQLBuilderChain} 返回当前实例（用于链式调用）
    */
   count(field = '*') {
-    this._query.COUNT = [`COUNT(${ field }) as count`];
+    this._query.count = [`COUNT(${ field }) as count`];
     return this;
   }
 
